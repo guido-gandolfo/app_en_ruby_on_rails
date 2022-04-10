@@ -1,0 +1,26 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+</div>
+<div class="grupo_form">
+    <div class="modulo_usuario">
+        <div class="buscador">
+            <%= form_tag("/users/asignarRol", method: "get") do %>
+                <%= label_tag(:DNI) %>
+                <%= text_field_tag(:DNI) %>
+                <%= hidden_field_tag(:rol, "Admin") %>
+                <%= submit_tag("Asignar") %>
+                <% end %>
+        </div>
+    </div>
+</div>
+<hr/>
+<div style="width:95%;margin:0 auto;">
+<% @administradores.each do |p| %>
+    <% if not current_user.DNI == p.DNI %>
+        <p><b>Nombre:</b> <%=p.name%> <%=p.apellido%></p>
+        <p><b>Email: </b> <%=p.email%></p>
+        <%= link_to("Quitar rol administrador", users_rolPaciente_url(:DNI => p.DNI), class: "btn btn-danger btn-sm") %>
+        <hr/>
+    <%end%>
+<%end%>
+</div>

@@ -1,0 +1,39 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+    <% @vaccine.each do |vacuna| %>
+      <% if (vacuna.estado == "Pendiente") || (vacuna.estado == "pendiente")%>
+          <h3>Turno</h3>
+      <p>
+        <strong>Nombre vacuna:</strong>
+        <%= vacuna.nombre_vacuna %>
+      </p>
+
+      <p>
+        <strong>Fecha aplicación:</strong>
+        <%= vacuna.fecha_aplicacion %>
+      </p>
+
+      <p>
+        <strong>Estado:</strong>
+        <%= vacuna.estado %>
+      </p>
+      <p>
+      <strong>Lugar de aplicación:</strong>
+      <%= vacuna.lugar_act %>
+      </p>
+
+      <p>
+      <strong>Dosis:</strong>
+      <%= vacuna.dosis %>
+      </p>
+
+      <p>
+      <strong>Descripción:</strong>
+      <%= vacuna.descripcion %>
+      </p>
+
+      <%= link_to 'Generar comprobante', vaccine_path(vacuna, format: :pdf) %>
+    <% end%>
+<%end%>

@@ -1,0 +1,64 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+
+<%if current_user.rol =="Admin"%>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Edad</th>
+            <th>Riesgo</th>
+            <th>Lugar</th>
+            <th>Vacunas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @vacunas.each do |vacuna| %>
+            <tr>
+                <td><%= vacuna.user.name%></td>
+                <td><%= vacuna.user.apellido%></td>
+                <td><%= vacuna.user.DNI%></td>
+                <td><%= @edad %></td>
+                <td><%= @riesgo %></td>
+                <td><%= vacuna.user.lugar %></td>
+                <% if vacuna.estado == "Atendido" %>
+                <td><%= vacuna.nombre_vacuna %></td>
+                <%end%>
+                
+            </tr>
+        <%end%>
+    </tbody>
+</table>
+
+<%else%>
+    <div style="width:95%;margin:0 auto;">
+    <% if current_user.rol=="Vacunador"%>               
+        <% if @vacunasGeneral.where(fecha_aplicacion: Date.today, lugar_act: current_user.lugar, estado: "Pendiente").count == 0 %>
+            <p>No hay pacientes para el dìa</p>
+        <% else %>
+            <span class="badge rounded-pill bg-secondary">Cantidad de vacunas a aplicar hoy en <%= current_user.lugar %>: <%= @vacunasGeneral.where(fecha_aplicacion: Date.today, lugar_act: current_user.lugar).count%> </span><br>
+        <% end %>
+        <span class="badge rounded-pill bg-secondary">Cantidad de pacientes atendidos hoy: <%= @vacunasGeneral.where(fecha_aplicacion: Date.today, lugar_act: current_user.lugar, estado: "Atendido").count%> </span>
+        <hr/>
+
+        <% if not @pendientes == 0 %>          
+            <% @vacunas.each do |vacuna| %>
+                <p>Turno: <%= vacuna.nombre_vacuna%></p>
+                <p>Dosis: <%= vacuna.dosis %></p>
+                <% u=User.find(vacuna.user_id) %>
+                <p>Paciente: <%= u.apellido %> <%= u.name %></p>
+                <p>DNI: <%= u.DNI %></p>
+                <%= link_to("Atendido", edit_vaccine_url(vacuna,:estado => "Atendido"), class: "btn btn-success btn-sm") %>
+                <hr/>
+            <% end %>
+        <% end %>
+        <%= link_to "Volver a la lista", vaccinators_listar_path %>
+    <% end %>
+    </div>
+<%end%>
+    
+

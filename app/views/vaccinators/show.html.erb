@@ -1,0 +1,20 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<% @vacunas.each do |vacuna| %>
+    <% if vacuna.fecha_aplicacion == Date.today%>
+        <% if vacuna.estado == "Pendiente"%>
+            <% if vacuna.lugar_act == current_user.lugar%>
+                <p>Turno: <%= vacuna.nombre_vacuna%></p>
+                <p>Dosis: <%= vacuna.dosis %></p>
+                <% u=User.find(vacuna.user_id) %>
+                <p>Paciente: <%= u.apellido %> <%= u.name %></p>
+                <p>DNI: <%= u.DNI %></p>
+                <%= link_to("Atendido", edit_vaccine_url(vacuna,:estado => "Atendido"), class: "btn btn-success btn-sm") %>
+                <%= link_to("No atendido", vaccinators_asignar_path(vacuna,:estado => "Pendiente"), class: "btn btn-danger btn-sm") %>
+                <p></p>
+            <%end%>
+        <%end%>
+    <%end%>
+<%end%>

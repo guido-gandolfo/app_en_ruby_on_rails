@@ -1,0 +1,66 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+
+<div style="width:95%;margin:0 auto;">
+
+<h3>Registrar paciente</h3>
+<hr/>
+<h5>Constraseña generada automaticamente: <%= @password %></h5>
+<h5>Clave de 4 digitos generada automaticamente: <%= @clave %></h5>
+<hr/>
+<%= form_for(@user) do |f| %>
+
+  <%= hidden_field_tag(:contraseña, @password) %>
+  <%= hidden_field_tag(:clave, @clave) %>
+
+  <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.text_field :name, autocomplete: "Ingrese el nombre" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :apellido %><br />
+    <%= f.text_field :apellido, autocomplete: "Ingrese el apellido" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :DNI %><br />
+    <%= f.text_field :DNI, autocomplete: "Ingrese el DNI" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nacimiento %><br />
+    <%= f.date_field :nacimiento, autocomplete: "Ingrese la fecha nacimiento" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :zona %><br />
+    <%= f.collection_select_field :vaccination_id, Vaccination.all, :id, :zona  %>
+  </div>
+  
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class='field'>
+    <%=f.label :riesgo%>
+    <%=f.label :riesgo, "Si", :value => "true"%>
+    <%=f.radio_button :riesgo, true%>
+    <%=f.label :riesgo, "No", :value => "false"%>
+    <%=f.radio_button :riesgo, false%> 
+  </div>
+  <hr/>
+  <div class="actions">
+    <%= f.submit "Registrar paciente" %>
+  </div>
+
+<% end %>
+
+<div>
+
+
+

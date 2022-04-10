@@ -1,0 +1,30 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+
+<h2 class="margen">Centros</h2>
+<hr/>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Zona</th>
+      <th>Direccion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vaccinations.each do |vaccination| %>
+      <tr>
+        <td class="tamanio-lista"><%= vaccination.zona %></td>
+        <td class="tamanio-lista"><%= vaccination.direccion %></td>
+        <td class="tamanio-lista"><%= link_to 'Modificar', edit_vaccination_path(vaccination) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

@@ -1,0 +1,12 @@
+<%= form_for vaccine do |vac|%>
+    <% vac.hidden_field :id %>
+    <% vac.hidden_field :nombre_vacuna%>
+    <% vac.hidden_field :dosis %>
+    <% vac.hidden_field :user_id %>
+    <% vac.hidden_field :estado%>
+    <% vac.hidden_field :lugar_act %>
+    <td><%= vac.date_field :fecha_aplicacion, value: @fecha%></td>
+    <div class="actions">
+        <td><%= vac.submit 'Dar turno'%></td>
+    </div>
+<% end%>   

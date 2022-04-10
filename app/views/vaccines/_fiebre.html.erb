@@ -1,0 +1,50 @@
+<table class="table table-striped table-bordered table-hover">
+<thead class="thead-dark">
+
+
+  <tr>
+      <th>Id</th>
+      <th>Nombre de la vacuna</th>
+      <th>Dosis</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Vacunatorio</th>
+      <th>Edad</th>
+      <th>Riesgo</th>
+      <th>Fecha de aplicacion</th>
+  </tr>
+</thead>
+<tbody>
+
+<% @vaccines.each do |vacuna| %>
+    <% @edad = Date.today.year - vacuna.user.nacimiento.year %>
+    <% if vacuna.estado == "Pendiente" && vacuna.nombre_vacuna=="Fiebre amarilla" && @edad > 18%>
+        <%if vacuna.fecha_aplicacion == nil || vacuna.fecha_aplicacion <= Date.today%>
+            <tr>
+                <div class="formato-params">
+                    <td><%= vacuna.id%></td>
+                    <td><%= vacuna.nombre_vacuna%></td>
+                    <td><%= vacuna.dosis %></td>
+                    <td><%= vacuna.user.name %></td>
+                    <td><%= vacuna.user.apellido %></td>
+                    <td><%= vacuna.user.lugar%></td>
+                    <td><%= @edad %></td>
+                    <% if vacuna.user.riesgo == true
+                        riesgo = "SI"
+                    else
+                        riesgo = "NO"
+                    end%>
+                    <% if vacuna.user.riesgo == true && @edad >= 18 && @edad < 60
+                        @fecha = vacuna.created_at.to_date  + 7
+                    else
+                        @fecha = "nil"
+                    end%>
+                    <td><%= riesgo%></td>
+                    <%= render 'formulario', vaccine: vacuna%>
+                </div>
+            </tr>
+        <% end%>
+    <%end%>
+<%end%>
+</tbody>
+</table>

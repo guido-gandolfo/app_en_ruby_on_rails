@@ -1,0 +1,41 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<div class="margen">
+<h4>Cargar vacunatorio</h4>
+<hr/>
+
+<%= form_with(model: @vaccination) do |centro| %>
+    <% if @vaccination.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(vaccination.errors.count, "error") %> prohibited this vaccination from being saved:</h2>
+  
+        <ul>
+          <% vaccination.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class='field'>
+    <div class="contenedor-ficha"
+        <div class="contenedor-campo">
+            <%=centro.label :"zona:"%>
+            <%=centro.text_field :zona, class:"form-ficha"%>
+        </div>
+    </div>
+    <div class="campo-descripcion">
+        <div class='field'>
+            <%=centro.label :"direccion:"%>
+            <%=centro.text_field :direccion, class:"form-ficha"%>
+        </div>
+        <div class="actions">
+            <%= centro.submit "Agregar" %>
+        </div>
+    </div>
+  <% end %>
+
+<%= link_to 'Volver', vaccinations_path %>
+</div>

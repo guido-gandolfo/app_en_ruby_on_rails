@@ -1,0 +1,83 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<div class="margen">
+
+<% if user_signed_in? %>
+    <% if current_user.clave4==nil %>
+        <h5>Bienvenido a vacunassist, es importante que guarde la siguiente clave de 4 digitos ya que de ahora en mas le servira para entrar al sistema <%= current_user.clave4 = SecureRandom.random_number(9_000)+1_000 %></h5>
+        <% current_user.save %>
+        <h5>Ademas no se olvide de editar sus datos personales para solicitar turnos para fiebre amarilla, gripe y COVID-19 </h5>
+    <% end %>
+<% end %>
+
+<%= form_for :vaccine do |v| %>   
+    
+  <div class="contenedor">
+      <div class="modulo">
+          <h2 class="titulo">Vacuna de Fiebre Amarilla</h2>
+          <div >
+              <h4 class="requisitos">Requisitos: </h4>
+              <ul>
+                  <li class="texto">-No habersela aplicado nunca</li>
+              </ul>
+          </div>
+          <% if user_signed_in? %>
+          <% if current_user.rol == "Vacunador" %>
+          <div class="botonera">
+              <div class="boton">
+              <%=link_to 'Asignar turno', new_vaccinator_path%>
+              </div>
+          </div>
+          <% end %>
+          <% if not current_user.rol == "Vacunador" %>
+                <% if not current_user.lugar == nil%>
+                    <% if not Date.today.year-current_user.nacimiento.year>=60 %>
+                    <div class="botonera">
+                        <div class="boton">
+                        <%=link_to 'Solicitar turno', new_vaccine_path%>
+                        </div>
+                    </div>
+                    <% else %>
+                    
+                    <li class="texto sin_formato">-Usted es mayor o igual a 60 años por lo que no puede solicitar</li>
+                    <% end %>
+                <%end%>
+                        
+          <% end %>
+          <% end %>
+      </div>
+      <div class="modulo">
+          <h2 class="titulo">Vacuna de COVID-19</h2>
+          <h4 class="requisitos">Requisitos: </h4>
+              <ul>
+                  <li class="texto">-Debe ser mayor de 18 años</li>
+                </ul>
+            <h4 class="requisitos">Informacion: </h4>
+                <ul>
+                    <li class="texto">-Los turnos se solicitan automaticamente luego de haberse registrado</li>
+                    <li class="texto">-Si es paciente de riesgo le llegara el turno a partir de los 7 dias de haberse registrado</li>
+                    <li class="texto">-Si no es paciente de riesgo debera esperar a que hallan turnos disponibles</li>
+                </ul>
+            <div>
+            </div>
+      </div>
+      <div class="modulo">
+          <h2 class="titulo">Vacuna de la Gripe</h2>
+            <h4 class="requisitos">Informacion: </h4>
+                <ul>
+                    <li class="texto">-Los turnos se solicitan automaticamente luego de haberse registrado</li>
+                    <li class="texto">-Si es menor de 60 años le llegara el turno automaticamente a partir de los 6 meses de su registro en el sistema</li>
+                    <li class="texto">-Si es mayor de 60 años le llegara el turno automaticamente a partir de los 3 meses de su registro en el sistema</li>
+                </ul>
+          </ul>
+          <div class="botonera">
+              <div class="boton">
+   
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+  <% end %>

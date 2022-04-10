@@ -1,0 +1,2 @@
+class Vaccinator < ApplicationRecord
+end

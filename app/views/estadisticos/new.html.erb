@@ -1,0 +1,13 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<% @vacunadores.each do |p| %>
+    <h1><b>Vacunador:</b> <%=p.name%> <%=p.apellido%></h1>
+    <p><b>Zona de vacunación: </b><%=p.lugar%></p>
+    <p><b>Cantidad de vacunas aplicadas: </b><%= @vacunas.where(lugar_act: p.lugar, estado: "Atendido",fecha_aplicacion: Date.today, vacunador_nombre: p.name, vacunador_apellido: p.apellido).count%></p>
+    <p><b>Cantidad de vacunas de covid aplicadas: </b><%= @vacunas.where(nombre_vacuna: "Covid", lugar_act: p.lugar, estado: "Atendido",fecha_aplicacion: Date.today,vacunador_nombre: p.name, vacunador_apellido: p.apellido).count%></p>
+    <p><b>Cantidad de vacunas de fiebre amarilla aplicadas: </b><%= @vacunas.where(nombre_vacuna: "Fiebre amarilla", lugar_act: p.lugar, estado: "Atendido",fecha_aplicacion: Date.today,vacunador_nombre: p.name, vacunador_apellido: p.apellido).count%></p>
+    <p><b>Cantidad de vacunas de gripe aplicadas: </b><%= @vacunas.where(nombre_vacuna: "Gripe", lugar_act: p.lugar, estado: "Atendido",fecha_aplicacion: Date.today, vacunador_nombre: p.name, vacunador_apellido: p.apellido).count%></p>
+<%end%>
+

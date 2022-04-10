@@ -1,0 +1,64 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<div class="margen">
+    <h2><u><b>Perfil</b></u></h2>
+    <hr/>
+    <%= form_for(@user) do |per|%>
+    <p></p>
+    <%=hidden_field_tag "user_id", @user.id%>
+    <div class='field'>
+    <%=per.label :nombre%>
+    <%=per.text_field :name, :placeholder => current_user.name%>
+    </div>
+    <p></p>
+    <div class='field'>
+    <%=per.label :apellido%>
+    <%=per.text_field :apellido, :placeholder => current_user.apellido%>
+    </div>
+    <p></p>
+    <div class='field'>
+    <%= per.label :email %>
+    <%= per.email_field :email, :placeholder => current_user.email%>
+    </div>
+    <p></p>
+    <div class='field'>
+    <%=per.label :riesgo%>
+    <%=per.label :riesgo, "Si", :value => "true"%>
+    <%=per.radio_button :riesgo, true%>
+    <%=per.label :riesgo, "No", :value => "false"%>
+    <%=per.radio_button :riesgo, false%> 
+    </div>
+    <p></p>
+    <%if not current_user.rol=="Vacunador"%>
+        <div class='field'>
+        <% lugares = {'Cementerio' => 'Cementerio', 'Municipalidad' => 'Municipalidad','Terminal' => 'Terminal'}%> <%=per.label :lugar%>
+        <%=per.select :lugar, lugares, :selected => current_user.lugar %> 
+        </div>
+    <p></p>
+    <div class='field'>
+    <%=per.label :DNI%>
+    <%=per.text_field :DNI, :placeholder => current_user.DNI %>
+    </div>
+    <p></p>
+    <div class='field'>
+    <%=per.label :nacimiento%>
+    <%=per.date_select :nacimiento, start_year: 1921, end_year: 2021,:placeholder => current_user.nacimiento%>
+    </div>
+    <p></p>
+    <%end%>
+    <%if current_user.rol=="Vacunador"%>
+    <div class='field'>
+    <%=per.label :"zona:"%>
+    <%=per.collection_select :vaccination_id, Vaccination.all, :id, :zona %>
+    </div>
+
+    <%end%>
+    <hr/>
+    <div class="actions">
+    <%= per.submit "Editar" %>
+    </div>
+    <%end%>
+    <%= link_to "Atras", users_perfil_path %>
+</div>

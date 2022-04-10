@@ -1,0 +1,80 @@
+<div class="cabecera tamanio">
+    <p id="notice"><%= notice %></p>
+    <p class="alert"><%=alert%></p>
+</div>
+
+<%if current_user.rol =="Admin" %>
+ 
+  <% if  params[:condicion] == "Fiebre amarilla"%>
+      <%if @vaccines.where("nombre_vacuna = ?","Fiebre amarilla").count == 0%>
+        <span class="badge rounded-pill bg-secondary"> No hay mas turnos pendientes para esta vacuna para el el dia de la fecha </span>
+      <%else%>
+      <%= render partial: 'fiebre', params[:condicion] => "Fiebre amarilla"%>
+          
+      <%end%>
+  <%else%>
+        <%if  params[:condicion] == "Gripe"%>
+
+              <%if @vaccines.where("nombre_vacuna = ?","Gripe").count == 0%>
+                <span class="badge rounded-pill bg-secondary"> No hay mas turnos pendientes para esta vacuna para el el dia de la fecha </span>
+                  
+              <%else%>
+              <%= render partial: 'gripe', params[:condicion] => "Gripe"%>
+              <%end%>
+        <%else%>
+            <%if  params[:condicion] == "Covid"%>
+              <%if @vaccines.where("nombre_vacuna = ?","Covid").count == 0%>
+                <span class="badge rounded-pill bg-secondary"> No hay mas turnos pendientes para esta vacuna para el el dia de la fecha </span>
+              <%else%>
+                <%= render 'covid', params[:condicion] => "Covid"%>
+              <%end%>
+            <%end%>
+        <%end%>
+  <% end%>
+
+<%else%>
+  <tbody>
+  <% if current_user.vaccines.where(estado: "Pendiente").count == 0 %>
+<h3>Usted no posee ningun turno actualmente</h3>
+<% end %>
+ 
+      <tr>
+        <% @vacunas.each do |vacuna| %>
+  
+        
+          <% if (vacuna.estado == "Pendiente") || (vacuna.estado == "pendiente")%>
+           <div class="margen">
+      <h3>Turno</h3>
+  <p>
+    <strong>Nombre vacuna:</strong>
+    <%= vacuna.nombre_vacuna %>
+  </p>
+
+  <p>
+    <strong>Fecha aplicación:</strong>
+    <%= vacuna.fecha_aplicacion %>
+  </p>
+
+  <p>
+    <strong>Estado:</strong>
+    <%= vacuna.estado %>
+  </p>
+  <p>
+    <strong>Dosis:</strong>
+    <%= vacuna.dosis %>
+  </p>
+  <p>
+    <strong>Lugar de aplicación:</strong>
+    <%= vacuna.lugar_act %>
+  </p>
+   <p> <strong>Direccion:</strong>
+   <%= Vaccination.find_by_zona(vacuna.lugar_act).direccion%></p>
+  
+  <%= link_to 'Generar comprobante', vaccine_path(vacuna, format: :pdf) %>
+<% end%>
+        </div>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%end%>

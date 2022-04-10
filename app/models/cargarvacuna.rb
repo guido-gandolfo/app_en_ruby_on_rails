@@ -1,0 +1,2 @@
+class Cargarvacuna < ApplicationRecord
+end

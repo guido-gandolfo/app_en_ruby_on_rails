@@ -1,0 +1,53 @@
+// Place all the styles related to the Vaccines controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.menu-reportes {
+    display: block;
+    font-size: 30px;
+    float: none;
+    margin-left: 10px;
+    list-style-type: none !important;
+}
+
+.menu-reportes li {
+    margin-top: 40px;
+    margin-right: 200px;
+    padding-top: 15px;
+    padding-left: 30px;
+    border-radius: 10px;
+    background-color: rgb(85, 83, 83);
+    color: blanchedalmond;
+    height: 50px;
+    width: 450px;
+    float: left;
+}
+
+li-menu:hover {
+    margin-top: 40px;
+    margin-right: 200px;
+    padding-top: 15px;
+    padding-left: 30px;
+    border-radius: 10px;
+    background-color: rgb(85, 83, 83) !important;
+    color: blanchedalmond;
+    height: 50px;
+    width: 450px;
+    float: left;
+}
+
+.formato-params {
+    font-size: 20px;
+}
+
+.espaciado {
+    margin-bottom: 20px;
+}
+
+.sin_formato {
+    text-decoration: none;
+}
+
+.sin_formato li:hover {
+    text-decoration: none !important;
+    outline: none;
+}

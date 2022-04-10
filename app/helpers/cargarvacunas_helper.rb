@@ -1,0 +1,2 @@
+module CargarvacunasHelper
+end

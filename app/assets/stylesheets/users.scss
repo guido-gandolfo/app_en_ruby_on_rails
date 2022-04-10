@@ -1,0 +1,228 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+* {
+    margin: 0px auto;
+    text-decoration: none !important;
+}
+
+*:hover {
+    text-decoration: none !important;
+    list-style-type: none;
+}
+
+.margen_principal {
+    margin-left: 20px;
+    margin-left: 30px;
+}
+
+.buscador {
+    margin-top: 10px;
+    margin-left: 10%;
+    text-transform: uppercase;
+    color: white;
+    font-size: 20px;
+}
+
+a,
+a:visited {
+    color: inherit !important;
+}
+
+a:hover {
+    color: rgb(181, 240, 191) !important;
+    background-color: rgb(143, 185, 103) !important;
+    border-radius: 5px;
+}
+
+.modulo_usuario {
+    text-decoration: none !important;
+    display: inline;
+}
+
+.grupo_form {
+    display: block;
+}
+
+a .menu_usuario {
+    background-color: rgb(143, 185, 103) !important;
+}
+
+a .menu_usuario:hover {
+    background-color: rgb(143, 185, 103) !important;
+}
+
+.contenedor_usuario {
+    text-align: right;
+}
+
+.usuario {
+    list-style-type: none;
+    padding-right: 15px;
+    padding-bottom: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(143, 185, 103);
+}
+
+.menu {
+    //background-color: #457b9d;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(143, 185, 103);
+    text-decoration: none !important;
+}
+
+.menu:hover {
+    background-color: rgb(143, 185, 103) !important;
+}
+
+.menu_I {
+    float: left;
+    display: block;
+    list-style-type: none !important;
+    padding: 15px;
+    text-decoration: none !important;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.menu_I:hover {
+    background-color: rgb(143, 185, 103) !important;
+    text-decoration: none !important;
+}
+
+.contenedor {
+    display: flex;
+}
+
+.requisitos {
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.requisitos,
+.requisito {
+    font-weight: 700;
+    font-size: 30px;
+    text-align: left;
+    overflow: hidden;
+}
+
+.texto {
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 20px;
+    text-align: left;
+    overflow: hidden;
+}
+
+.modulo {
+    margin-top: 50px;
+    color: rgb(5, 5, 5);
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(233, 237, 248);
+    width: 30%;
+    height: 620px;
+    text-align: center;
+}
+
+.titulo {
+    color: #1d3557;
+    font-size: 40px;
+    margin-top: 25px;
+}
+
+.botonera {
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 290px;
+}
+
+.boton {
+    display: block;
+    width: 90%;
+    height: 50px;
+    //background-color: rgb(192, 204, 226);
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.boton:hover {
+    text-decoration: none;
+}
+
+.form-carga-vacuna {
+    margin-left: 30px;
+}
+
+.campo-DNI {
+    text-transform: uppercase;
+}
+
+.margen {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.bloque {
+    display: block;
+}
+
+.datos_paciente {
+    padding-top: 10px;
+    float: inline-table;
+    display: flex;
+}
+
+.titulo-ficha {
+    width: 100%;
+    text-align: center;
+    justify-items: flex-start;
+}
+
+.datos_paciente p {
+    font-size: 20px;
+}
+
+.field {
+    margin-top: 1em;
+    font-size: 20px;
+}
+
+.form-ficha {
+    border: none;
+    border-bottom: 1px solid;
+    outline: none;
+    width: 100%;
+    display: block;
+    padding: 10px 0px;
+    font-size: 1.2em;
+}
+
+.cabecera {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-left: 15px;
+    color: black;
+}
+
+.tamanio {
+    margin-top: 15px;
+}
+
+.tamanio p {
+    font-size: 20px;
+}
+
+.datos-personales p,
+.sin-pacientes {
+    font-size: 20px;
+}
+
+.tamanio2 {
+    font-size: 20px;
+}

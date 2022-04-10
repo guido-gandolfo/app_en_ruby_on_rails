@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vacunassist</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+    <%= stylesheet_link_tag 'users', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="fondo-gris">
+    <header>
+      <nav class="contenedor_menu">
+        <ul class="menu">
+          <li class="menu_I"><%= image_tag("logo.jpeg", :class => "imagen") %></li>
+          <li class="menu_I"><%= link_to "Inicio", root_path %></li>
+
+          <% if not user_signed_in? %> 
+            <li class="menu_I"><%= link_to "Iniciar Sesion", sign_in_path %></li>
+
+          <% else %>
+            <% if current_user.rol=="Vacunador" %>
+              <li class="menu_I"><%= link_to "Registrar paciente", new_salvacion_path %></li>
+              <li class="menu_I"><%= link_to "Listar turnos", vaccinators_listar_path %></li>
+            <% end %>
+
+            <% if not current_user.rol=="Vacunador" %>
+              <% if not current_user.rol=="Admin" %>
+                <li class="menu_I"><%= link_to "Mis vacunas", users_infovacunas_path %></li>
+                <li class="menu_I"><%= link_to "Ver Turnos", vaccines_path %></li>     
+              <%end%>
+            <%end%>
+            
+            <% if current_user.rol=="Admin" %>
+              <li class="menu_I"><%= link_to "Administrar centros", vaccinations_path %></li>
+              <li class="menu_I"><%= link_to "Reportes", estadisticos_todos_path %></li>
+              <li class="menu_I"><%= link_to "Vacunadores", users_listarVacunadores_path %></li>
+              <li class="menu_I"><%= link_to "Fiebre amarilla", vaccines_path(:condicion => "Fiebre amarilla") %></li>
+              <li class="menu_I"><%= link_to "Gripe", vaccines_path(:condicion => "Gripe") %></li>
+              <li class="menu_I"><%= link_to "COVID", vaccines_path(:condicion => "Covid") %></li>
+              <li class="menu_I"><%= link_to "Administradores", users_listarAdministradores_path %></li>
+            <%end%>
+
+          <div class="grupo_form">
+          <div class="modulo_usuario">
+          <%end%>
+            <% if user_signed_in? %>
+              <% if current_user.rol=="Admin"%>
+
+                    <div class="buscador">
+                        <%= form_tag("/users/buscarPersona", method: "get") do %>
+                          <%= label_tag(:DNI) %>
+                          <%= text_field_tag(:DNI) %>
+                          <%= submit_tag("Buscar") %>
+                        <% end %>
+                    </div>
+
+              <% end %>
+            <% end %>
+            </div>
+            <div class="contenedor_usuario">
+                <div class="usuario">
+                  <% if user_signed_in? %>
+                    <%= link_to(current_user.name+' '+current_user.apellido, users_perfil_path) %><br>
+                    <%= link_to('Cerrar Sesion', destroy_user_session_path, :method => 'delete') %>
+                  <% end %>
+                </div>
+            </div>
+         </div>
+        </ul>
+      </nav>
+    </header>
+
+    <%= yield %>
+  </body>
+</html>

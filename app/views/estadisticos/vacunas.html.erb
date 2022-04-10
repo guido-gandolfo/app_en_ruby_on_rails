@@ -1,0 +1,8 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<h1>El dia de hoy (<%=Date.today%>) se aplicaron un total de  <b><%= @vacunas.where(estado: "Atendido", fecha_aplicacion: Date.today).count%></b> vacunas</h1>
+<h3><b>Sobre la vacuna del covid fueron aplicadas: </b><%= @vacunas.where(nombre_vacuna: "Covid", estado: "Atendido",fecha_aplicacion: Date.today).count%></h3>
+    <h3><b>Sobre la vacuna de la fiebre amarilla fueron aplicadas: </b><%= @vacunas.where(nombre_vacuna: "Fiebre amarilla", estado: "Atendido", fecha_aplicacion: Date.today).count%></h3>
+    <h3><b>Sobre la vacuna de la gripe fueron aplicadas: </b><%= @vacunas.where(nombre_vacuna: "Gripe", estado: "Atendido", fecha_aplicacion: Date.today).count%></h3>

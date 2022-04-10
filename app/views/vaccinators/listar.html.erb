@@ -1,0 +1,45 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<div style="width:95%;margin:0 auto;">
+<% if @vacunas.where(fecha_aplicacion: Date.today, lugar_act: current_user.lugar, estado: "Pendiente").count == 0 %>
+    <p class="sin-pacientes">No hay pacientes para el dìa</p>
+<% else %>
+    <span class="badge rounded-pill bg-secondary">Cantidad de vacunas a aplicar hoy en <%= current_user.lugar %>: <%= @vacunas.where(fecha_aplicacion: Date.today, lugar_act: current_user.lugar).count%> </span><br>
+<% end %>
+<span class="badge rounded-pill bg-secondary">Cantidad de pacientes atendidos: <%= @vacunas.where(fecha_aplicacion: Date.today, lugar_act: current_user.lugar, estado: "Atendido").count%> </span>
+</br>
+<%= link_to("Marcar a todos como no atendidos", vaccinators_asignar_path(:estado => "Pendiente"), class: "btn btn-danger btn-sm") %>
+<hr/>
+
+<% if user_signed_in? %>
+    <% if current_user.rol=="Vacunador"%>
+        <%= form_tag("/users/buscarPersona", method: "get") do %>
+            <h4>Buscar persona en la lista</h4>
+            <%= label_tag(:DNI) %>
+            <%= text_field_tag(:DNI) %>
+            <%= submit_tag("Buscar") %>
+        <% end %>
+    <% end %>
+<% end %>
+<hr/>
+
+<% @vacunas.each do |vacuna| %>
+    <% if vacuna.fecha_aplicacion == Date.today%>
+        <% if vacuna.estado == "Pendiente"%>
+            <% if vacuna.lugar_act == current_user.lugar%>
+                <div class="tamanio">
+                    <p>Turno: <%= vacuna.nombre_vacuna%></p>
+                    <p>Dosis: <%= vacuna.dosis %></p>
+                    <% u=User.find(vacuna.user_id) %>
+                    <p>Paciente: <%= u.apellido %> <%= u.name %></p>
+                    <p>DNI: <%= u.DNI %></p>
+                    <%= link_to("Atendido", edit_vaccine_url(vacuna,:estado => "Atendido"), class: "btn btn-success btn-sm") %>
+                </div>
+                <hr/>
+            <%end%>
+        <%end%>
+    <%end%>
+<%end%>
+</div>

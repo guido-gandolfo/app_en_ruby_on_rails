@@ -1,0 +1,18 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+
+<h3>Inserte DNI de la persona a la que quiera asignar el turno:</h3>
+<%= form_for @vaccinator do |per|%>
+    <p></p>
+    <div class='field'>
+    <%=per.label :DNI%>
+    <%=per.text_field :DNI %>
+    </div>
+    <p></p>
+    <div class="actions">
+    <%= per.submit "Asignar turno" %>
+    </div>
+<%end%>
+

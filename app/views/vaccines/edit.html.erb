@@ -1,0 +1,66 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+
+
+<div class="margen">
+        <% if current_user.rol == "Vacunador" %>
+           
+            <%= form_with(model: @vaccine) do |vac| %>
+                <div class="bloque">
+                    <h4 class="titulo-ficha">Ficha de vacuna aplicada</h4>
+                    <hr/>
+                    <h7>Datos del paciente:</h7>
+                    <div class="datos_paciente">
+                        <p>Nombre: <%= @user.name%></p>
+                        <p>Apellido: <%= @user.apellido%></p>
+                        <p>DNI: <%= @user.DNI%></p>
+                        <p>Edad: <%= Date.today.year - @user.nacimiento.year%></p>
+                        <% if @user.riesgo == true
+                            @riesgo = "SI"
+                        else
+                            @riesgo = "NO"
+                        end%>
+                        <p>Riesgo: <%= @riesgo%></p>
+                    </div>
+                    <hr/>
+                    <div class='field'>
+                        <div class="contenedor-ficha"
+                            <div class="contenedor-campo">
+                        
+                                 
+                                <p class="formato-params" ><strong><%=vac.label :"nombre_vacuna:"%></strong>
+                                <%= @vaccine.nombre_vacuna%> </p>
+                            </div>
+                            <%=vac.hidden_field :nombre_vacuna, class:"form-ficha"%>
+                        </div>
+                        <div class='field'>
+                            <div class="contenedor-campo">
+                                <p class="formato-params" ><strong><%=vac.label :"dosis:"%></strong>
+                                <%= @vaccine.dosis%> </p>
+                            </div>
+                            <%=vac.hidden_field :dosis, class:"form-ficha"%>
+                        </div>
+                        <hr/>
+                        <div class="campo-descripcion">
+                            <div class='field'>
+                                    <strong><%=vac.label :"tipo_vacuna:"%></strong>
+                                    <%=vac.text_field :tipo_vacuna, class:"form-ficha"%>
+                            </div>
+                        </div>
+                        <div class="campo-descripcion">
+                            <div class='field'>
+                                <strong><%=vac.label :"descripcion:"%></strong>
+                                <%=vac.text_area :descripcion, style: "height:200px;", class:"form-ficha"%>
+                            </div>
+                            <div class="actions">
+                                <%= vac.submit "Agregar"%>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            <% end %>
+               
+        <%end%>
+</div>

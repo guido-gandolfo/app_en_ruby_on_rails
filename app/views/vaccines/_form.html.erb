@@ -1,0 +1,25 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+
+<%= form_with(model: vaccine) do |form| %>
+  <% if vaccine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vaccine.errors.count, "error") %> prohibited this vaccine from being saved:</h2>
+
+      <ul>
+        <% vaccine.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="contenedor_solicitud">
+  	<p class="tamanio">¿Esta seguro que desea solicitar un turno para la fiebre amarilla?</p>
+        <div class="actions">
+          <%= form.submit 'Solicitar'%>
+        </div>
+    </div>
+  
+<% end %>

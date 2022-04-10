@@ -1,0 +1,21 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<div class="margen">
+    <h3><u><b>Perfil</b></u></h3>
+    <hr/>
+    <div class="datos-personales">
+        <p><b>Nombre:</b><% p=current_user %>
+        <%=p.name%> <%=p.apellido%></p>
+        <p><b>Email: </b> <%=p.email%></p>
+        <%if not p.rol=="Vacunador"%>
+        <p><b>DNI: </b> <%=p.DNI%></p>
+        <p><b>Fecha de nacimiento: </b> <%=p.nacimiento%></p>
+        <%end%>
+        <p><b>Zona de vacunación: </b> <%=p.lugar%></p>
+        <p><b>Riesgo: </b> <%= "Si" if p.riesgo %><%= "No" if not p.riesgo %></p>
+    </div>
+    <hr/>
+    <%= link_to "Editar Perfil", edit_user_path(current_user) %>
+</div>

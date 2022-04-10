@@ -1,0 +1,13 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<h4 class="espacio">Modificar direccion del centro</h4>
+<hr/>
+<div class="margen">
+
+    <%= render 'form', vaccination: @vaccination %>
+
+    <%= link_to 'Mostrar', @vaccination %> |
+    <%= link_to 'Volver', vaccinations_path %>
+</div>

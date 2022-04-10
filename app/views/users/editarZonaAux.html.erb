@@ -1,0 +1,20 @@
+    <div style="width:95%;margin:0 auto;">
+
+        <p><b>Nombre:</b> <%=@user.name%> <%=@user.apellido%></p>
+        <p><b>Zona de vacunación: </b><%=@user.lugar%></p>
+
+        <%= form_tag("/users/editarZona", method: "get") do %>
+            <%= collection_select(:zona, :id, Vaccination.all, :id, :zona) %>
+            <%= hidden_field_tag(:DNI, @user.DNI) %>
+            <%= submit_tag("Modificar zona") %>
+        <% end %>
+
+        <% if(false)%>
+            <%= label_tag(:zona) %>
+            <%= text_field_tag(:zona) %>
+            <%= collection_select(:user, :id, @users, :id, :name) %>
+            <%=per.collection_select :vaccination_id, Vaccination.all, :id, :zona %>
+        <%end%>
+    </div>
+
+

@@ -1,0 +1,30 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<table class="table table-striped table-bordered table-hover">
+<thead class="thead-dark">
+<tr>
+<th>Nombre de la vacuna</th>
+<th>Fecha de aplicación</th>
+<th>Lugar de aplicación</th>
+<th>Dosis</th>
+<th>Descripción</th>
+<th>Comprobante</th>
+</tr>
+</thead>
+<tbody>
+<% @vacunas.each do |vacuna| %>
+<tr>
+<% if vacuna.estado == "Atendido"%>
+<td><%= vacuna.nombre_vacuna%></td>
+<td><%= vacuna.fecha_aplicacion%></td>
+<td><%= vacuna.lugar_act%></td>
+<td><%= vacuna.dosis %></td>
+<td><%= vacuna.descripcion %></td>
+<td><%= link_to 'PDF', vaccine_path(vacuna, format: :pdf) %></td>
+<% end%>
+</tr>
+<% end%>
+</tbody>
+</table>

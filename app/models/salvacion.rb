@@ -1,0 +1,2 @@
+class Salvacion < ApplicationRecord
+end

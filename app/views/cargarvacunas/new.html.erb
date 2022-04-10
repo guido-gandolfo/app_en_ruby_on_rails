@@ -1,0 +1,23 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+    <p class="alert cabecera"><%=alert%></p>
+</div>
+<%= form_for @cargar do |per|%>
+    <%= @user.id %>
+    <div class='field'>
+    <% vacunas = {'Fiebre amarilla' => 'Fiebre amarilla', 'Covid' => 'Covid','Gripe' => 'Gripe'}%>
+    <%=per.label :nombre%>
+    <%=per.select :nombre,  %>
+    </div>
+    <div class='field'>
+    <%=per.label :dosis%>
+    <%=per.text_field :dosis%>
+    </div>
+    <div class='field'>
+    <%=per.label :descripcion%>
+    <%=per.text_area :descripcion%>
+    </div>
+    <div class="actions">
+    <%= per.submit "Agregar" %>
+    </div>
+<% end %>

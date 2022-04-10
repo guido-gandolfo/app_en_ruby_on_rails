@@ -1,0 +1,28 @@
+<div class="cabecera">
+    <p class="cabecera" id="notice"><%= notice %></p>
+</div>
+<div class="grupo_form">
+    <div class="modulo_usuario">
+        <div class="buscador">
+            <%= form_tag("/users/asignarRol", method: "get") do %>
+                <%= label_tag(:DNI) %>
+                <%= text_field_tag(:DNI) %>
+                <%= hidden_field_tag(:rol, "Vacunador") %>
+                <%= submit_tag("Asignar") %>
+                <% end %>
+        </div>
+    </div>
+</div>
+
+<hr/>
+<div style="width:95%;margin:0 auto;">
+<% @vacunadores.each do |p| %>
+    <p><b>Nombre:</b> <%=p.name%> <%=p.apellido%></p>
+    <p><b>Email: </b> <%=p.email%></p>
+    <p><b>Zona de vacunación: </b><%=p.lugar%></p>
+    <%= link_to("Quitar rol vacunador", users_rolPaciente_url(:DNI => p.DNI), class: "btn btn-danger btn-sm") %>
+    <%= link_to("Modificar zona", users_editarZonaAux_url(:DNI => p.DNI), class: "btn btn-success btn-sm") %>
+    <hr/>
+<%end%>
+
+</div>
